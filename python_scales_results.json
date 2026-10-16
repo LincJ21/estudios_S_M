@@ -1,0 +1,62 @@
+{
+  "1k": {
+    "n": 32,
+    "vars": 1024,
+    "hungaro": {
+      "costo": 485.0,
+      "tiempo_ms": 4.798252999989927,
+      "memoria_kb": 4.5078125
+    },
+    "modi": {
+      "costo": 7000.0,
+      "iters": 57,
+      "tiempo_ms": 60.349212999881274,
+      "memoria_kb": 39.6875
+    },
+    "ss": {
+      "costo": 7000.0,
+      "tiempo_ms": 5264.506322000216,
+      "memoria_kb": 26.3671875
+    }
+  },
+  "10k": {
+    "n": 100,
+    "vars": 10000,
+    "hungaro": {
+      "costo": 1099.0,
+      "tiempo_ms": 83.32270300024902,
+      "memoria_kb": 10.8515625
+    },
+    "modi": {
+      "costo": 10900.0,
+      "iters": 145,
+      "tiempo_ms": 2761.134173999835,
+      "memoria_kb": 227.4375
+    },
+    "ss": {
+      "costo": null,
+      "tiempo_ms": null,
+      "memoria_kb": null
+    }
+  },
+  "100k": {
+    "n": 316,
+    "vars": 99856,
+    "hungaro": {
+      "costo": 3184.0,
+      "tiempo_ms": 4670.317779000015,
+      "memoria_kb": 40.6796875
+    },
+    "modi": {
+      "costo": 31600.0,
+      "iters": 204,
+      "tiempo_ms": 41950.09252299997,
+      "memoria_kb": 1837.5625
+    },
+    "ss": {
+      "costo": null,
+      "tiempo_ms": null,
+      "memoria_kb": null
+    }
+  }
+}

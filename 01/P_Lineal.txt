@@ -1,0 +1,1 @@
+buscar un problema que sea de minimizacion y que todas las restricciones sea menor-igual

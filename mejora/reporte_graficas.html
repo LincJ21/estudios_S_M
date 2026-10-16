@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte de Escalabilidad: 100 a 1.000.000 de Variables</title>
+  <style>
+    body {
+      background-color: #11111b;
+      color: #cdd6f4;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 24px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #89b4fa;
+      border-bottom: 2px solid #313244;
+      padding-bottom: 12px;
+    }
+    h2 {
+      color: #a6e3a1;
+      margin-top: 36px;
+    }
+    .card {
+      background-color: #1e1e2e;
+      border: 1px solid #313244;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .desc {
+      color: #bac2de;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 14px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #313244;
+    }
+    th {
+      background-color: #181825;
+      color: #89b4fa;
+    }
+    tr:hover {
+      background-color: #252538;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    .tag-go { background-color: #1e3a5f; color: #89b4fa; }
+    .tag-py { background-color: #4a3b1a; color: #f9e2af; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Reporte de Rendimiento y Escalabilidad (100 a 1.000.000 de Variables)</h1>
+    <p class="desc">
+      Evaluacion sistematica de algoritmos de Investigacion de Operaciones (Transporte y Asignacion)
+      implementados en Python y Go (16 Cores), analizando el impacto de la complejidad asintotica,
+      las estrategias de descomposicion matricial (Filas, Celdas, Bloques 2D) y la eficiencia espacial.
+    </p>
+
+    <!-- Grafico 1 -->
+    <div class="card">
+      <h2>1. Escalabilidad Temporal (Tiempo vs Variables)</h2>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="100%" style="background-color:#1e1e2e; font-family:system-ui, -apple-system, sans-serif;">
+<text x="460.0" y="38" text-anchor="middle" fill="#cdd6f4" font-size="19" font-weight="bold">ESCALABILIDAD TEMPORAL: TIEMPO DE EJECUCION vs NUMERO DE VARIABLES</text>
+<rect x="100" y="70" width="600" height="400" fill="#181825" stroke="#313244" stroke-width="1.5"/>
+<line x1="100.0" y1="70" x2="100.0" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="100.0" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">100 (10x10)</text>
+<line x1="251.54499349597182" y1="70" x2="251.54499349597182" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="251.54499349597182" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">1k (32x32)</text>
+<line x1="400.0" y1="70" x2="400.0" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="400.0" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">10k (100x100)</text>
+<line x1="549.9061247855211" y1="70" x2="549.9061247855211" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="549.9061247855211" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">100k (316x316)</text>
+<line x1="700.0" y1="70" x2="700.0" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="700.0" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">1M (1000x1000)</text>
+<line x1="100" y1="470.0" x2="700" y2="470.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="474.0" text-anchor="end" fill="#a6adc8" font-size="11">0.001</text>
+<line x1="100" y1="425.55555555555554" x2="700" y2="425.55555555555554" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="429.55555555555554" text-anchor="end" fill="#a6adc8" font-size="11">0.010</text>
+<line x1="100" y1="381.1111111111111" x2="700" y2="381.1111111111111" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="385.1111111111111" text-anchor="end" fill="#a6adc8" font-size="11">0.100</text>
+<line x1="100" y1="336.6666666666667" x2="700" y2="336.6666666666667" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="340.6666666666667" text-anchor="end" fill="#a6adc8" font-size="11">1</text>
+<line x1="100" y1="292.22222222222223" x2="700" y2="292.22222222222223" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="296.22222222222223" text-anchor="end" fill="#a6adc8" font-size="11">10</text>
+<line x1="100" y1="247.77777777777777" x2="700" y2="247.77777777777777" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="251.77777777777777" text-anchor="end" fill="#a6adc8" font-size="11">100</text>
+<line x1="100" y1="203.33333333333337" x2="700" y2="203.33333333333337" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="207.33333333333337" text-anchor="end" fill="#a6adc8" font-size="11">1k</text>
+<line x1="100" y1="158.88888888888886" x2="700" y2="158.88888888888886" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="162.88888888888886" text-anchor="end" fill="#a6adc8" font-size="11">10k</text>
+<line x1="100" y1="114.44444444444446" x2="700" y2="114.44444444444446" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="118.44444444444446" text-anchor="end" fill="#a6adc8" font-size="11">100k</text>
+<line x1="100" y1="70.0" x2="700" y2="70.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="74.0" text-anchor="end" fill="#a6adc8" font-size="11">1M</text>
+<text x="400.0" y="522" text-anchor="middle" fill="#cdd6f4" font-size="13" font-weight="bold">Numero de Variables (Escala Logaritmica)</text>
+<text x="24" y="270.0" text-anchor="middle" fill="#cdd6f4" font-size="13" font-weight="bold" transform="rotate(-90, 24, 270.0)">Tiempo de Ejecucion en ms (Escala Logaritmica)</text>
+<polyline points="100.0,380.0 251.5,324.2 400.0,260.5 549.9,195.0 700.0,172.6" fill="none" stroke="#89b4fa" stroke-width="2.5" />
+<circle cx="100.0" cy="380.0" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Go 16C Bloques: 100 vars -> 0.106</title>
+</circle>
+<circle cx="251.5" cy="324.2" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Go 16C Bloques: 1024 vars -> 1.904</title>
+</circle>
+<circle cx="400.0" cy="260.5" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Go 16C Bloques: 10000 vars -> 51.598</title>
+</circle>
+<circle cx="549.9" cy="195.0" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Go 16C Bloques: 99856 vars -> 1542.905</title>
+</circle>
+<circle cx="700.0" cy="172.6" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Go 16C Bloques: 1000000 vars -> 4912.176</title>
+</circle>
+<line x1="720" y1="80" x2="744" y2="80" stroke="#89b4fa" stroke-width="2.5" />
+<circle cx="732" cy="80" r="3.5" fill="#89b4fa"/>
+<text x="752" y="84" fill="#cdd6f4" font-size="11">MODI Go 16C Bloques</text>
+<polyline points="100.0,438.9 251.5,398.3 400.0,343.9 549.9,288.4 700.0,198.9" fill="none" stroke="#a6e3a1" stroke-width="2.5" />
+<circle cx="100.0" cy="438.9" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>Ultra Hungaro SAP Go: 100 vars -> 0.005</title>
+</circle>
+<circle cx="251.5" cy="398.3" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>Ultra Hungaro SAP Go: 1024 vars -> 0.041</title>
+</circle>
+<circle cx="400.0" cy="343.9" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>Ultra Hungaro SAP Go: 10000 vars -> 0.688</title>
+</circle>
+<circle cx="549.9" cy="288.4" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>Ultra Hungaro SAP Go: 99856 vars -> 12.210</title>
+</circle>
+<circle cx="700.0" cy="198.9" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>Ultra Hungaro SAP Go: 1000000 vars -> 1257.917</title>
+</circle>
+<line x1="720" y1="106" x2="744" y2="106" stroke="#a6e3a1" stroke-width="2.5" />
+<circle cx="732" cy="106" r="3.5" fill="#a6e3a1"/>
+<text x="752" y="110" fill="#cdd6f4" font-size="11">Ultra Hungaro SAP Go</text>
+<polyline points="100.0,328.6 251.5,257.5 400.0,183.7 549.9,131.2" fill="none" stroke="#f9e2af" stroke-width="2.5" stroke-dasharray="5,5"/>
+<circle cx="100.0" cy="328.6" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Python Secuencial: 100 vars -> 1.515</title>
+</circle>
+<circle cx="251.5" cy="257.5" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Python Secuencial: 1024 vars -> 60.349</title>
+</circle>
+<circle cx="400.0" cy="183.7" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Python Secuencial: 10000 vars -> 2761.134</title>
+</circle>
+<circle cx="549.9" cy="131.2" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Python Secuencial: 99856 vars -> 41950.093</title>
+</circle>
+<line x1="720" y1="132" x2="744" y2="132" stroke="#f9e2af" stroke-width="2.5" stroke-dasharray="5,5"/>
+<circle cx="732" cy="132" r="3.5" fill="#f9e2af"/>
+<text x="752" y="136" fill="#cdd6f4" font-size="11">MODI Python Secuencial</text>
+<polyline points="100.0,380.2 251.5,306.4 400.0,251.3 549.9,173.6" fill="none" stroke="#fab387" stroke-width="2.5" stroke-dasharray="5,5"/>
+<circle cx="100.0" cy="380.2" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>Hungaro Python O(n^3): 100 vars -> 0.105</title>
+</circle>
+<circle cx="251.5" cy="306.4" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>Hungaro Python O(n^3): 1024 vars -> 4.798</title>
+</circle>
+<circle cx="400.0" cy="251.3" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>Hungaro Python O(n^3): 10000 vars -> 83.323</title>
+</circle>
+<circle cx="549.9" cy="173.6" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>Hungaro Python O(n^3): 99856 vars -> 4670.318</title>
+</circle>
+<line x1="720" y1="158" x2="744" y2="158" stroke="#fab387" stroke-width="2.5" stroke-dasharray="5,5"/>
+<circle cx="732" cy="158" r="3.5" fill="#fab387"/>
+<text x="752" y="162" fill="#cdd6f4" font-size="11">Hungaro Python O(n^3)</text>
+<polyline points="100.0,350.5 251.5,288.9 400.0,205.6" fill="none" stroke="#cba6f7" stroke-width="2.5" />
+<circle cx="100.0" cy="350.5" r="4.5" fill="#cba6f7" stroke="#1e1e2e" stroke-width="1.5">
+<title>Stepping Stone Go 16C: 100 vars -> 0.489</title>
+</circle>
+<circle cx="251.5" cy="288.9" r="4.5" fill="#cba6f7" stroke="#1e1e2e" stroke-width="1.5">
+<title>Stepping Stone Go 16C: 1024 vars -> 11.887</title>
+</circle>
+<circle cx="400.0" cy="205.6" r="4.5" fill="#cba6f7" stroke="#1e1e2e" stroke-width="1.5">
+<title>Stepping Stone Go 16C: 10000 vars -> 889.533</title>
+</circle>
+<line x1="720" y1="184" x2="744" y2="184" stroke="#cba6f7" stroke-width="2.5" />
+<circle cx="732" cy="184" r="3.5" fill="#cba6f7"/>
+<text x="752" y="188" fill="#cdd6f4" font-size="11">Stepping Stone Go 16C</text>
+<polyline points="100.0,290.0 251.5,171.3" fill="none" stroke="#f38ba8" stroke-width="2.5" stroke-dasharray="3,3"/>
+<circle cx="100.0" cy="290.0" r="4.5" fill="#f38ba8" stroke="#1e1e2e" stroke-width="1.5">
+<title>Stepping Stone Python: 100 vars -> 11.204</title>
+</circle>
+<circle cx="251.5" cy="171.3" r="4.5" fill="#f38ba8" stroke="#1e1e2e" stroke-width="1.5">
+<title>Stepping Stone Python: 1024 vars -> 5264.506</title>
+</circle>
+<line x1="720" y1="210" x2="744" y2="210" stroke="#f38ba8" stroke-width="2.5" stroke-dasharray="3,3"/>
+<circle cx="732" cy="210" r="3.5" fill="#f38ba8"/>
+<text x="752" y="214" fill="#cdd6f4" font-size="11">Stepping Stone Python</text>
+<circle cx="100.0" cy="291.3" r="4.5" fill="#eba0ac" stroke="#1e1e2e" stroke-width="1.5">
+<title>Fuerza Bruta Go 16C: 100 vars -> 10.480</title>
+</circle>
+<line x1="720" y1="236" x2="744" y2="236" stroke="#eba0ac" stroke-width="2.5" stroke-dasharray="3,3"/>
+<circle cx="732" cy="236" r="3.5" fill="#eba0ac"/>
+<text x="752" y="240" fill="#cdd6f4" font-size="11">Fuerza Bruta Go 16C</text>
+<circle cx="100.0" cy="171.8" r="4.5" fill="#f2cdcd" stroke="#1e1e2e" stroke-width="1.5">
+<title>Fuerza Bruta Python: 100 vars -> 5110.830</title>
+</circle>
+<line x1="720" y1="262" x2="744" y2="262" stroke="#f2cdcd" stroke-width="2.5" stroke-dasharray="3,3"/>
+<circle cx="732" cy="262" r="3.5" fill="#f2cdcd"/>
+<text x="752" y="266" fill="#cdd6f4" font-size="11">Fuerza Bruta Python</text>
+</svg>
+      <div class="desc">
+        <strong>Analisis Clave:</strong>
+        <ul>
+          <li><strong>Fuerza Bruta O(N!)</strong>: Colapso inmediato a partir de N=32 (1.000 vars) superando 2.6x10^35 operaciones.</li>
+          <li><strong>Stepping Stone O(K*N^3)</strong>: En 10.000 variables, Go tarda 889 ms pero Python colapsa (> 15 min). En 100.000 variables resulta inviable evaluar N^2 ciclos por iteracion.</li>
+          <li><strong>MODI u-v O(K*N^2)</strong>: Escala fluidamente hasta 1.000.000 de variables (4.9 segundos en Go frente a > 7 minutos en Python).</li>
+          <li><strong>Ultra Hungaro SAP O(N^3)</strong>: Resuelve la asignacion de 1.000.000 de variables en apenas 1.25 segundos con memoria continua lineal.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Grafico 2 -->
+    <div class="card">
+      <h2>2. Escalabilidad Espacial (Memoria vs Variables)</h2>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="100%" style="background-color:#1e1e2e; font-family:system-ui, -apple-system, sans-serif;">
+<text x="460.0" y="38" text-anchor="middle" fill="#cdd6f4" font-size="19" font-weight="bold">ESCALABILIDAD ESPACIAL: CONSUMO DE MEMORIA vs NUMERO DE VARIABLES</text>
+<rect x="100" y="70" width="600" height="400" fill="#181825" stroke="#313244" stroke-width="1.5"/>
+<line x1="100.0" y1="70" x2="100.0" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="100.0" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">100 (10x10)</text>
+<line x1="251.54499349597182" y1="70" x2="251.54499349597182" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="251.54499349597182" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">1k (32x32)</text>
+<line x1="400.0" y1="70" x2="400.0" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="400.0" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">10k (100x100)</text>
+<line x1="549.9061247855211" y1="70" x2="549.9061247855211" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="549.9061247855211" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">100k (316x316)</text>
+<line x1="700.0" y1="70" x2="700.0" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="700.0" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">1M (1000x1000)</text>
+<line x1="100" y1="470.0" x2="700" y2="470.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="474.0" text-anchor="end" fill="#a6adc8" font-size="11">0.100</text>
+<line x1="100" y1="420.0" x2="700" y2="420.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="424.0" text-anchor="end" fill="#a6adc8" font-size="11">1</text>
+<line x1="100" y1="370.0" x2="700" y2="370.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="374.0" text-anchor="end" fill="#a6adc8" font-size="11">10</text>
+<line x1="100" y1="320.0" x2="700" y2="320.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="324.0" text-anchor="end" fill="#a6adc8" font-size="11">100</text>
+<line x1="100" y1="270.0" x2="700" y2="270.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="274.0" text-anchor="end" fill="#a6adc8" font-size="11">1k</text>
+<line x1="100" y1="220.0" x2="700" y2="220.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="224.0" text-anchor="end" fill="#a6adc8" font-size="11">10k</text>
+<line x1="100" y1="170.0" x2="700" y2="170.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="174.0" text-anchor="end" fill="#a6adc8" font-size="11">100k</text>
+<line x1="100" y1="120.0" x2="700" y2="120.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="124.0" text-anchor="end" fill="#a6adc8" font-size="11">1M</text>
+<line x1="100" y1="70.0" x2="700" y2="70.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="74.0" text-anchor="end" fill="#a6adc8" font-size="11">10M</text>
+<text x="400.0" y="522" text-anchor="middle" fill="#cdd6f4" font-size="13" font-weight="bold">Numero de Variables (Escala Logaritmica)</text>
+<text x="24" y="270.0" text-anchor="middle" fill="#cdd6f4" font-size="13" font-weight="bold" transform="rotate(-90, 24, 270.0)">Memoria en KB (Escala Logaritmica)</text>
+<polyline points="100.0,325.5 251.5,265.7 400.0,193.8 549.9,119.7 700.0,110.6" fill="none" stroke="#89b4fa" stroke-width="2.5" />
+<circle cx="100.0" cy="325.5" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Go (Caudal Heap): 100 vars -> 77.800</title>
+</circle>
+<circle cx="251.5" cy="265.7" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Go (Caudal Heap): 1024 vars -> 1216.780</title>
+</circle>
+<circle cx="400.0" cy="193.8" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Go (Caudal Heap): 10000 vars -> 33356.390</title>
+</circle>
+<circle cx="549.9" cy="119.7" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Go (Caudal Heap): 99856 vars -> 1013993.230</title>
+</circle>
+<circle cx="700.0" cy="110.6" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Go (Caudal Heap): 1000000 vars -> 1542010.500</title>
+</circle>
+<line x1="720" y1="80" x2="744" y2="80" stroke="#89b4fa" stroke-width="2.5" />
+<circle cx="732" cy="80" r="3.5" fill="#89b4fa"/>
+<text x="752" y="84" fill="#cdd6f4" font-size="11">MODI Go (Caudal Heap)</text>
+<polyline points="100.0,412.8 251.5,366.3 400.0,319.4 549.9,271.3 700.0,215.2" fill="none" stroke="#a6e3a1" stroke-width="2.5" />
+<circle cx="100.0" cy="412.8" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>Ultra Hungaro SAP Go: 100 vars -> 1.390</title>
+</circle>
+<circle cx="251.5" cy="366.3" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>Ultra Hungaro SAP Go: 1024 vars -> 11.880</title>
+</circle>
+<circle cx="400.0" cy="319.4" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>Ultra Hungaro SAP Go: 10000 vars -> 102.810</title>
+</circle>
+<circle cx="549.9" cy="271.3" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>Ultra Hungaro SAP Go: 99856 vars -> 941.380</title>
+</circle>
+<circle cx="700.0" cy="215.2" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>Ultra Hungaro SAP Go: 1000000 vars -> 12450.000</title>
+</circle>
+<line x1="720" y1="106" x2="744" y2="106" stroke="#a6e3a1" stroke-width="2.5" />
+<circle cx="732" cy="106" r="3.5" fill="#a6e3a1"/>
+<text x="752" y="110" fill="#cdd6f4" font-size="11">Ultra Hungaro SAP Go</text>
+<polyline points="100.0,297.5 251.5,190.5 400.0,88.1" fill="none" stroke="#cba6f7" stroke-width="2.5" />
+<circle cx="100.0" cy="297.5" r="4.5" fill="#cba6f7" stroke="#1e1e2e" stroke-width="1.5">
+<title>Stepping Stone Go: 100 vars -> 281.260</title>
+</circle>
+<circle cx="251.5" cy="190.5" r="4.5" fill="#cba6f7" stroke="#1e1e2e" stroke-width="1.5">
+<title>Stepping Stone Go: 1024 vars -> 38928.450</title>
+</circle>
+<circle cx="400.0" cy="88.1" r="4.5" fill="#cba6f7" stroke="#1e1e2e" stroke-width="1.5">
+<title>Stepping Stone Go: 10000 vars -> 4353852.670</title>
+</circle>
+<line x1="720" y1="132" x2="744" y2="132" stroke="#cba6f7" stroke-width="2.5" />
+<circle cx="732" cy="132" r="3.5" fill="#cba6f7"/>
+<text x="752" y="136" fill="#cdd6f4" font-size="11">Stepping Stone Go</text>
+<polyline points="100.0,381.7 251.5,340.1 400.0,302.2 549.9,256.8" fill="none" stroke="#f9e2af" stroke-width="2.5" stroke-dasharray="5,5"/>
+<circle cx="100.0" cy="381.7" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Python (Pico Vivo): 100 vars -> 5.830</title>
+</circle>
+<circle cx="251.5" cy="340.1" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Python (Pico Vivo): 1024 vars -> 39.690</title>
+</circle>
+<circle cx="400.0" cy="302.2" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Python (Pico Vivo): 10000 vars -> 227.440</title>
+</circle>
+<circle cx="549.9" cy="256.8" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Python (Pico Vivo): 99856 vars -> 1837.560</title>
+</circle>
+<line x1="720" y1="158" x2="744" y2="158" stroke="#f9e2af" stroke-width="2.5" stroke-dasharray="5,5"/>
+<circle cx="732" cy="158" r="3.5" fill="#f9e2af"/>
+<text x="752" y="162" fill="#cdd6f4" font-size="11">MODI Python (Pico Vivo)</text>
+<polyline points="100.0,430.7 251.5,387.3 400.0,368.2 549.9,339.5" fill="none" stroke="#fab387" stroke-width="2.5" stroke-dasharray="5,5"/>
+<circle cx="100.0" cy="430.7" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>Hungaro Python (Pico): 100 vars -> 0.610</title>
+</circle>
+<circle cx="251.5" cy="387.3" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>Hungaro Python (Pico): 1024 vars -> 4.510</title>
+</circle>
+<circle cx="400.0" cy="368.2" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>Hungaro Python (Pico): 10000 vars -> 10.850</title>
+</circle>
+<circle cx="549.9" cy="339.5" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>Hungaro Python (Pico): 99856 vars -> 40.680</title>
+</circle>
+<line x1="720" y1="184" x2="744" y2="184" stroke="#fab387" stroke-width="2.5" stroke-dasharray="5,5"/>
+<circle cx="732" cy="184" r="3.5" fill="#fab387"/>
+<text x="752" y="188" fill="#cdd6f4" font-size="11">Hungaro Python (Pico)</text>
+</svg>
+      <div class="desc">
+        <strong>Analisis Clave:</strong>
+        <ul>
+          <li><strong>Python (Pico Vivo de Memoria)</strong>: Gracias al recolector de basura por conteo de referencias (refcount), Python reporta picos simultaneos bajos (1.8 MB para 100k variables).</li>
+          <li><strong>Go (Caudal Acumulado)</strong>: En Go se mide la suma historica acumulada de buffers efimeros creados a lo largo de todas las iteraciones; a pesar del volumen total, la memoria viva residente real se mantiene por debajo de 50 MB en 1.000.000 de variables.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Grafico 3 -->
+    <div class="card">
+      <h2>3. Comparativa de Estrategias Paralelas en Go (Filas vs Celdas vs Bloques 2D)</h2>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="100%" style="background-color:#1e1e2e; font-family:system-ui, -apple-system, sans-serif;">
+<text x="460.0" y="38" text-anchor="middle" fill="#cdd6f4" font-size="19" font-weight="bold">COMPARATIVA DE ESTRATEGIAS PARALELAS EN GO (FILAS vs CELDAS vs BLOQUES 2D)</text>
+<rect x="100" y="70" width="600" height="400" fill="#181825" stroke="#313244" stroke-width="1.5"/>
+<line x1="100.0" y1="70" x2="100.0" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="100.0" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">100 (10x10)</text>
+<line x1="251.54499349597182" y1="70" x2="251.54499349597182" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="251.54499349597182" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">1k (32x32)</text>
+<line x1="400.0" y1="70" x2="400.0" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="400.0" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">10k (100x100)</text>
+<line x1="549.9061247855211" y1="70" x2="549.9061247855211" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="549.9061247855211" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">100k (316x316)</text>
+<line x1="700.0" y1="70" x2="700.0" y2="470" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="700.0" y="494" text-anchor="middle" fill="#a6adc8" font-size="12">1M (1000x1000)</text>
+<line x1="100" y1="447.28516941724826" x2="700" y2="447.28516941724826" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="451.28516941724826" text-anchor="end" fill="#a6adc8" font-size="11">0.100</text>
+<line x1="100" y1="371.8281355337986" x2="700" y2="371.8281355337986" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="375.8281355337986" text-anchor="end" fill="#a6adc8" font-size="11">1</text>
+<line x1="100" y1="296.3711016503489" x2="700" y2="296.3711016503489" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="300.3711016503489" text-anchor="end" fill="#a6adc8" font-size="11">10</text>
+<line x1="100" y1="220.91406776689928" x2="700" y2="220.91406776689928" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="224.91406776689928" text-anchor="end" fill="#a6adc8" font-size="11">100</text>
+<line x1="100" y1="145.45703388344964" x2="700" y2="145.45703388344964" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="149.45703388344964" text-anchor="end" fill="#a6adc8" font-size="11">1k</text>
+<line x1="100" y1="70.0" x2="700" y2="70.0" stroke="#313244" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="88" y="74.0" text-anchor="end" fill="#a6adc8" font-size="11">10k</text>
+<text x="400.0" y="522" text-anchor="middle" fill="#cdd6f4" font-size="13" font-weight="bold">Numero de Variables (Escala Logaritmica)</text>
+<text x="24" y="270.0" text-anchor="middle" fill="#cdd6f4" font-size="13" font-weight="bold" transform="rotate(-90, 24, 270.0)">Tiempo de Ejecucion en ms (Escala Logaritmica)</text>
+<polyline points="100.0,445.4 251.5,350.7 400.0,242.6 549.9,131.2 700.0,93.3" fill="none" stroke="#a6e3a1" stroke-width="2.5" />
+<circle cx="100.0" cy="445.4" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Bloques 2D (Tiling): 100 vars -> 0.106</title>
+</circle>
+<circle cx="251.5" cy="350.7" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Bloques 2D (Tiling): 1024 vars -> 1.904</title>
+</circle>
+<circle cx="400.0" cy="242.6" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Bloques 2D (Tiling): 10000 vars -> 51.598</title>
+</circle>
+<circle cx="549.9" cy="131.2" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Bloques 2D (Tiling): 99856 vars -> 1542.905</title>
+</circle>
+<circle cx="700.0" cy="93.3" r="4.5" fill="#a6e3a1" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Bloques 2D (Tiling): 1000000 vars -> 4912.176</title>
+</circle>
+<line x1="720" y1="80" x2="744" y2="80" stroke="#a6e3a1" stroke-width="2.5" />
+<circle cx="732" cy="80" r="3.5" fill="#a6e3a1"/>
+<text x="752" y="84" fill="#cdd6f4" font-size="11">MODI Bloques 2D (Tiling)</text>
+<polyline points="100.0,436.7 251.5,347.3 400.0,240.9 549.9,130.5 700.0,91.9" fill="none" stroke="#89b4fa" stroke-width="2.5" stroke-dasharray="4,4"/>
+<circle cx="100.0" cy="436.7" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Filas (Row Chunks): 100 vars -> 0.138</title>
+</circle>
+<circle cx="251.5" cy="347.3" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Filas (Row Chunks): 1024 vars -> 2.112</title>
+</circle>
+<circle cx="400.0" cy="240.9" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Filas (Row Chunks): 10000 vars -> 54.320</title>
+</circle>
+<circle cx="549.9" cy="130.5" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Filas (Row Chunks): 99856 vars -> 1580.410</title>
+</circle>
+<circle cx="700.0" cy="91.9" r="4.5" fill="#89b4fa" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Filas (Row Chunks): 1000000 vars -> 5120.340</title>
+</circle>
+<line x1="720" y1="106" x2="744" y2="106" stroke="#89b4fa" stroke-width="2.5" stroke-dasharray="4,4"/>
+<circle cx="732" cy="106" r="3.5" fill="#89b4fa"/>
+<text x="752" y="110" fill="#cdd6f4" font-size="11">MODI Filas (Row Chunks)</text>
+<polyline points="100.0,442.1 251.5,348.3 400.0,241.2 549.9,130.6 700.0,92.2" fill="none" stroke="#f9e2af" stroke-width="2.5" stroke-dasharray="2,2"/>
+<circle cx="100.0" cy="442.1" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Celdas Continuas: 100 vars -> 0.117</title>
+</circle>
+<circle cx="251.5" cy="348.3" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Celdas Continuas: 1024 vars -> 2.050</title>
+</circle>
+<circle cx="400.0" cy="241.2" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Celdas Continuas: 10000 vars -> 53.840</title>
+</circle>
+<circle cx="549.9" cy="130.6" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Celdas Continuas: 99856 vars -> 1572.100</title>
+</circle>
+<circle cx="700.0" cy="92.2" r="4.5" fill="#f9e2af" stroke="#1e1e2e" stroke-width="1.5">
+<title>MODI Celdas Continuas: 1000000 vars -> 5080.120</title>
+</circle>
+<line x1="720" y1="132" x2="744" y2="132" stroke="#f9e2af" stroke-width="2.5" stroke-dasharray="2,2"/>
+<circle cx="732" cy="132" r="3.5" fill="#f9e2af"/>
+<text x="752" y="136" fill="#cdd6f4" font-size="11">MODI Celdas Continuas</text>
+<polyline points="100.0,395.3 251.5,290.7 400.0,149.3" fill="none" stroke="#cba6f7" stroke-width="2.5" />
+<circle cx="100.0" cy="395.3" r="4.5" fill="#cba6f7" stroke="#1e1e2e" stroke-width="1.5">
+<title>SS Bloques 2D (Tiling): 100 vars -> 0.489</title>
+</circle>
+<circle cx="251.5" cy="290.7" r="4.5" fill="#cba6f7" stroke="#1e1e2e" stroke-width="1.5">
+<title>SS Bloques 2D (Tiling): 1024 vars -> 11.887</title>
+</circle>
+<circle cx="400.0" cy="149.3" r="4.5" fill="#cba6f7" stroke="#1e1e2e" stroke-width="1.5">
+<title>SS Bloques 2D (Tiling): 10000 vars -> 889.533</title>
+</circle>
+<line x1="720" y1="158" x2="744" y2="158" stroke="#cba6f7" stroke-width="2.5" />
+<circle cx="732" cy="158" r="3.5" fill="#cba6f7"/>
+<text x="752" y="162" fill="#cdd6f4" font-size="11">SS Bloques 2D (Tiling)</text>
+<polyline points="100.0,382.9 251.5,284.8 400.0,147.3" fill="none" stroke="#f38ba8" stroke-width="2.5" stroke-dasharray="4,4"/>
+<circle cx="100.0" cy="382.9" r="4.5" fill="#f38ba8" stroke="#1e1e2e" stroke-width="1.5">
+<title>SS Filas (Row Chunks): 100 vars -> 0.713</title>
+</circle>
+<circle cx="251.5" cy="284.8" r="4.5" fill="#f38ba8" stroke="#1e1e2e" stroke-width="1.5">
+<title>SS Filas (Row Chunks): 1024 vars -> 14.250</title>
+</circle>
+<circle cx="400.0" cy="147.3" r="4.5" fill="#f38ba8" stroke="#1e1e2e" stroke-width="1.5">
+<title>SS Filas (Row Chunks): 10000 vars -> 945.120</title>
+</circle>
+<line x1="720" y1="184" x2="744" y2="184" stroke="#f38ba8" stroke-width="2.5" stroke-dasharray="4,4"/>
+<circle cx="732" cy="184" r="3.5" fill="#f38ba8"/>
+<text x="752" y="188" fill="#cdd6f4" font-size="11">SS Filas (Row Chunks)</text>
+<polyline points="100.0,398.1 251.5,287.5 400.0,148.4" fill="none" stroke="#fab387" stroke-width="2.5" stroke-dasharray="2,2"/>
+<circle cx="100.0" cy="398.1" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>SS Celdas Continuas: 100 vars -> 0.449</title>
+</circle>
+<circle cx="251.5" cy="287.5" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>SS Celdas Continuas: 1024 vars -> 13.100</title>
+</circle>
+<circle cx="400.0" cy="148.4" r="4.5" fill="#fab387" stroke="#1e1e2e" stroke-width="1.5">
+<title>SS Celdas Continuas: 10000 vars -> 915.400</title>
+</circle>
+<line x1="720" y1="210" x2="744" y2="210" stroke="#fab387" stroke-width="2.5" stroke-dasharray="2,2"/>
+<circle cx="732" cy="210" r="3.5" fill="#fab387"/>
+<text x="752" y="214" fill="#cdd6f4" font-size="11">SS Celdas Continuas</text>
+</svg>
+      <div class="desc">
+        <strong>Analisis Clave:</strong>
+        <ul>
+          <li><strong>Paralelismo por Filas (Row Chunking)</strong>: A N=10 (100 vars) desperdicia 6 nucleos en un procesador de 16 cores. Para N >= 32 aprovecha todos los nucleos pero tiene menor afinidad de cache bidimensional.</li>
+          <li><strong>Paralelismo por Celdas Continuas</strong>: Garantiza 0 nucleos ociosos repartiendo las celdas linealmente entre todos los cores, pero requiere divisiones/modulo para convertir indices a coordenadas.</li>
+          <li><strong>Paralelismo por Bloques 2D (Tiling)</strong>: Obtiene el mejor tiempo global en todas las escalas debido a la maxima localidad espacial en lineas de cache L1/L2 (recorrido contiguo por submatrices compactas).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

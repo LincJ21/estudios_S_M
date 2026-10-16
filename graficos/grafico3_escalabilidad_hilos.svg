@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" style="background:#ffffff; font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="0" y="0" width="1000" height="70" fill="#0f172a"/>
+  <text x="30" y="32" fill="#ffffff" font-size="20" font-weight="bold">Escalabilidad Multihilo en Go: Ley de Amdahl y Cache L1/L2</text>
+  <text x="30" y="54" fill="#94a3b8" font-size="13">Speedup segun numero de hilos (1 a 16 Cores) para 1.000.000 de variables</text>
+
+  <rect x="80" y="90" width="870" height="380" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Eje Y: Speedup de 1x a 16x (y=470 para 0x, y=90 para 16x -> factor: 380/16 = 23.75 px/x) -->
+  <!-- 2x: y=422, 4x: y=375, 6x: y=327, 8x: y=280, 10x: y=232, 12x: y=185, 14x: y=137, 16x: y=90 -->
+  <line x1="80" y1="422" x2="950" y2="422" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="70" y="426" fill="#64748b" font-size="11" text-anchor="end">2x</text>
+
+  <line x1="80" y1="375" x2="950" y2="375" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="70" y="379" fill="#64748b" font-size="11" text-anchor="end">4x</text>
+
+  <line x1="80" y1="327" x2="950" y2="327" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="70" y="331" fill="#64748b" font-size="11" text-anchor="end">6x</text>
+
+  <line x1="80" y1="280" x2="950" y2="280" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="70" y="284" fill="#64748b" font-size="11" text-anchor="end">8x</text>
+
+  <line x1="80" y1="232" x2="950" y2="232" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="70" y="236" fill="#64748b" font-size="11" text-anchor="end">10x</text>
+
+  <line x1="80" y1="185" x2="950" y2="185" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="70" y="189" fill="#64748b" font-size="11" text-anchor="end">12x</text>
+
+  <line x1="80" y1="90" x2="950" y2="90" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="70" y="94" fill="#0f172a" font-size="11" font-weight="bold" text-anchor="end">16x</text>
+
+  <!-- Eje X: 1, 2, 4, 8, 12, 16 Hilos -->
+  <!-- coords: 120, 260, 420, 600, 760, 920 -->
+  <line x1="120" y1="90" x2="120" y2="470" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="120" y="492" fill="#1e293b" font-size="12" font-weight="bold" text-anchor="middle">1 Hilo</text>
+
+  <line x1="260" y1="90" x2="260" y2="470" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="260" y="492" fill="#1e293b" font-size="12" font-weight="bold" text-anchor="middle">2 Hilos</text>
+
+  <line x1="420" y1="90" x2="420" y2="470" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="420" y="492" fill="#1e293b" font-size="12" font-weight="bold" text-anchor="middle">4 Hilos</text>
+
+  <line x1="600" y1="90" x2="600" y2="470" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="600" y="492" fill="#1e293b" font-size="12" font-weight="bold" text-anchor="middle">8 Hilos</text>
+
+  <line x1="760" y1="90" x2="760" y2="470" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="760" y="492" fill="#1e293b" font-size="12" font-weight="bold" text-anchor="middle">12 Hilos</text>
+
+  <line x1="920" y1="90" x2="920" y2="470" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="920" y="492" fill="#1e293b" font-size="12" font-weight="bold" text-anchor="middle">16 Hilos</text>
+
+  <!-- Curva 1: Lineal Ideal (Gris claro punteado) -->
+  <line x1="120" y1="446" x2="920" y2="90" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="880" y="75" fill="#64748b" font-size="11" font-weight="bold">Ideal Lineal (16x)</text>
+
+  <!-- Curva 2: 2D Tiling (Azul solido) -->
+  <!-- 1: 1x (446), 2: 1.95x (423), 4: 3.82x (379), 8: 6.70x (310), 12: 8.35x (271), 16: 9.25x (250) -->
+  <polyline points="120,446 260,423 420,379 600,310 760,271 920,250" fill="none" stroke="#2563eb" stroke-width="3.5"/>
+  <circle cx="120" cy="446" r="5" fill="#2563eb"/>
+  <circle cx="260" cy="423" r="5" fill="#2563eb"/>
+  <circle cx="420" cy="379" r="5" fill="#2563eb"/>
+  <circle cx="600" cy="310" r="5" fill="#2563eb"/>
+  <circle cx="760" cy="271" r="5" fill="#2563eb"/>
+  <circle cx="920" cy="250" r="5" fill="#2563eb"/>
+  <text x="860" y="235" fill="#1d4ed8" font-size="12" font-weight="bold">2D Tiling (9.25x)</text>
+
+  <!-- Curva 3: Row Chunking (Verde) -->
+  <!-- 1: 1x (446), 2: 1.82x (426), 4: 3.25x (392), 8: 5.12x (348), 12: 6.20x (322), 16: 7.10x (301) -->
+  <polyline points="120,446 260,426 420,392 600,348 760,322 920,301" fill="none" stroke="#059669" stroke-width="2.5"/>
+  <circle cx="120" cy="446" r="4" fill="#059669"/>
+  <circle cx="260" cy="426" r="4" fill="#059669"/>
+  <circle cx="420" cy="392" r="4" fill="#059669"/>
+  <circle cx="600" cy="348" r="4" fill="#059669"/>
+  <circle cx="760" cy="322" r="4" fill="#059669"/>
+  <circle cx="920" cy="301" r="4" fill="#059669"/>
+  <text x="860" y="320" fill="#047857" font-size="12" font-weight="bold">Filas (7.10x)</text>
+
+  <!-- Curva 4: Celda a Celda (Rojo) -->
+  <!-- 1: 1x (446), 2: 1.40x (436), 4: 2.10x (420), 8: 2.58x (408), 12: 2.72x (405), 16: 2.80x (403) -->
+  <polyline points="120,446 260,436 420,420 600,408 760,405 920,403" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="4,2"/>
+  <circle cx="120" cy="446" r="4" fill="#dc2626"/>
+  <circle cx="260" cy="436" r="4" fill="#dc2626"/>
+  <circle cx="420" cy="420" r="4" fill="#dc2626"/>
+  <circle cx="600" cy="408" r="4" fill="#dc2626"/>
+  <circle cx="760" cy="405" r="4" fill="#dc2626"/>
+  <circle cx="920" cy="403" r="4" fill="#dc2626"/>
+  <text x="850" y="420" fill="#b91c1c" font-size="12" font-weight="bold">Celdas (2.80x)</text>
+
+  <!-- Cuadro Explicativo -->
+  <rect x="140" y="115" width="410" height="110" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" rx="6"/>
+  <text x="155" y="137" fill="#0f172a" font-size="12" font-weight="bold">Interpretacion del Rendimiento Hardware:</text>
+  <text x="155" y="157" fill="#334155" font-size="11">1. Tiling 2D reduce el trafico hacia la memoria RAM conservando</text>
+  <text x="155" y="173" fill="#334155" font-size="11">   bloques en L1/L2 (32KB), logrando 9.25x en 16 nucleos.</text>
+  <text x="155" y="189" fill="#334155" font-size="11">2. Division por Filas sufre saturacion de bus de memoria en matrices grandes.</text>
+  <text x="155" y="205" fill="#334155" font-size="11">3. Celdas individuales colapsan por contencion de locks y barreras.</text>
+
+  <!-- Leyenda Inferior -->
+  <line x1="80" y1="535" x2="110" y2="535" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="120" y="540" fill="#475569" font-size="12">Ideal Lineal</text>
+
+  <rect x="230" y="527" width="16" height="16" fill="#2563eb" rx="3"/>
+  <text x="255" y="540" fill="#1e293b" font-size="12">Tiling 2D por Bloques</text>
+
+  <rect x="460" y="527" width="16" height="16" fill="#059669" rx="3"/>
+  <text x="485" y="540" fill="#1e293b" font-size="12">Division por Filas</text>
+
+  <line x1="680" y1="535" x2="710" y2="535" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="4,2"/>
+  <text x="720" y="540" fill="#1e293b" font-size="12">Descomposicion por Celdas</text>
+</svg>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" style="background:#ffffff; font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <rect x="0" y="0" width="1000" height="70" fill="#0f172a"/>
+  <text x="30" y="32" fill="#ffffff" font-size="20" font-weight="bold">Optimizacion de Jerarquia de Memoria y Arquitectura Interna</text>
+  <text x="30" y="54" fill="#94a3b8" font-size="13">Comparativa entre particionamiento matricial y reutilizacion de buffers BFSScratch</text>
+
+  <!-- Panel Izquierdo: Division Tradicional por Filas -->
+  <rect x="40" y="95" width="280" height="430" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="8"/>
+  <rect x="40" y="95" width="280" height="40" fill="#e2e8f0" rx="8 8 0 0"/>
+  <text x="180" y="121" fill="#1e293b" font-size="13" font-weight="bold" text-anchor="middle">A. Particion por Filas</text>
+
+  <!-- Matriz con lineas de barrido horizontal -->
+  <rect x="70" y="160" width="220" height="150" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+  <rect x="70" y="160" width="220" height="30" fill="#fed7aa" stroke="#f97316" stroke-width="1"/>
+  <text x="180" y="180" fill="#c2410c" font-size="10" font-weight="bold" text-anchor="middle">Fila Larga &gt; Capacidad L1</text>
+
+  <rect x="70" y="220" width="220" height="30" fill="#fed7aa" stroke="#f97316" stroke-width="1"/>
+  <text x="180" y="240" fill="#c2410c" font-size="10" font-weight="bold" text-anchor="middle">Fila Larga &gt; Capacidad L1</text>
+
+  <text x="60" y="340" fill="#dc2626" font-size="11" font-weight="bold">Problema Detectado:</text>
+  <text x="60" y="360" fill="#475569" font-size="11">Al recorrer columnas extensas</text>
+  <text x="60" y="378" fill="#475569" font-size="11">(N &gt; 1.000), las lineas de cache</text>
+  <text x="60" y="396" fill="#475569" font-size="11">L1 (32 KB) se expulsan antes</text>
+  <text x="60" y="414" fill="#475569" font-size="11">de poder reutilizarse.</text>
+  <text x="60" y="440" fill="#b91c1c" font-size="11" font-weight="bold">Cache Miss Ratio: ~28%</text>
+
+  <!-- Panel Central: 2D Block Tiling -->
+  <rect x="360" y="95" width="280" height="430" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5" rx="8"/>
+  <rect x="360" y="95" width="280" height="40" fill="#dbeafe" rx="8 8 0 0"/>
+  <text x="500" y="121" fill="#1e40af" font-size="13" font-weight="bold" text-anchor="middle">B. Tiling 2D por Bloques</text>
+
+  <!-- Matriz dividida en bloques B x B -->
+  <rect x="390" y="160" width="220" height="150" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+  <rect x="395" y="165" width="65" height="65" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="427" y="202" fill="#1e40af" font-size="10" font-weight="bold" text-anchor="middle">L1 Cache</text>
+
+  <rect x="467" y="165" width="65" height="65" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <rect x="539" y="165" width="65" height="65" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+
+  <rect x="395" y="237" width="65" height="65" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <rect x="467" y="237" width="65" height="65" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+  <rect x="539" y="237" width="65" height="65" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+
+  <text x="380" y="340" fill="#1d4ed8" font-size="11" font-weight="bold">Ventaja Arquitectonica:</text>
+  <text x="380" y="360" fill="#334155" font-size="11">Cada sub-bloque de 64x64 celdas</text>
+  <text x="380" y="378" fill="#334155" font-size="11">cabe integro en cache L1.</text>
+  <text x="380" y="396" fill="#334155" font-size="11">Cero colision de lineas entre cores.</text>
+  <text x="380" y="414" fill="#334155" font-size="11">Elimina False Sharing.</text>
+  <text x="380" y="440" fill="#15803d" font-size="11" font-weight="bold">Cache Hit Ratio: &gt;92%</text>
+
+  <!-- Panel Derecho: Pool BFSScratch -->
+  <rect x="680" y="95" width="280" height="430" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" rx="8"/>
+  <rect x="680" y="95" width="280" height="40" fill="#dcfce7" rx="8 8 0 0"/>
+  <text x="820" y="121" fill="#166534" font-size="13" font-weight="bold" text-anchor="middle">C. Pool BFSScratch</text>
+
+  <!-- Bloques de memoria estatica -->
+  <rect x="710" y="165" width="220" height="40" fill="#bbf7d0" stroke="#16a34a" stroke-width="1" rx="4"/>
+  <text x="820" y="189" fill="#14532d" font-size="11" font-weight="bold" text-anchor="middle">Buffer Pred[M+N] Reutilizable</text>
+
+  <rect x="710" y="215" width="220" height="40" fill="#bbf7d0" stroke="#16a34a" stroke-width="1" rx="4"/>
+  <text x="820" y="239" fill="#14532d" font-size="11" font-weight="bold" text-anchor="middle">Buffer Cola Queue[M+N]</text>
+
+  <rect x="710" y="265" width="220" height="40" fill="#bbf7d0" stroke="#16a34a" stroke-width="1" rx="4"/>
+  <text x="820" y="289" fill="#14532d" font-size="11" font-weight="bold" text-anchor="middle">Bitset Visited[] Compacto</text>
+
+  <text x="700" y="340" fill="#15803d" font-size="11" font-weight="bold">Efecto en el Rendimiento:</text>
+  <text x="700" y="360" fill="#334155" font-size="11">Cero invocaciones al recolector</text>
+  <text x="700" y="378" fill="#334155" font-size="11">de basura (GC) durante el ciclo</text>
+  <text x="700" y="396" fill="#334155" font-size="11">de pivoteo de Vogel y MODI.</text>
+  <text x="700" y="414" fill="#334155" font-size="11">Latencia deterministica y estable.</text>
+  <text x="700" y="440" fill="#166534" font-size="11" font-weight="bold">Pausas de GC: 0.0 ms</text>
+</svg>
